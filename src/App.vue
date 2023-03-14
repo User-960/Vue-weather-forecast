@@ -1,11 +1,16 @@
 <script>
   export default {
     data: () => ({
-      city: ""
+      city: "",
+      error: ""
     }),
     methods: {
-      inputValue() {
-        this.city
+      getWeather() {
+        if (this.city.trim().length < 2) {
+          this.error = "More than one character required";
+          return false;
+        }
+        this.error = "";
       }
     },
     computed: {
@@ -22,8 +27,9 @@
       <h1 class="weather__title">Weather Forecast</h1>
       <p class="weather__text">Check the weather in {{ city == "" ? "your city" : cityName }}</p>
       <input class="weather__input" v-model="city" type="text" placeholder="Enter city">
-      <button class="weather__btn btn primary" v-if="city != ''">Get weather</button>
+      <button class="weather__btn btn primary" v-if="city != ''" @click="getWeather()">Get weather</button>
       <button disabled class="weather__btn btn primary" v-else>Enter the name of the city</button>
+      <p class="weather__error">{{ error }}</p>
     </div>
   </div>
 </template>
@@ -51,5 +57,9 @@
 
 .weather__btn {
   margin-left: 20px;
+}
+
+.weather__error {
+  color: #e53935;
 }
 </style>
