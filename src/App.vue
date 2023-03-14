@@ -1,12 +1,29 @@
-<script></script>
+<script>
+  export default {
+    data: () => ({
+      city: ""
+    }),
+    methods: {
+      inputValue() {
+        this.city
+      }
+    },
+    computed: {
+      cityName() {
+        return "«" + this.city + "»";
+      }
+    }
+  }
+</script>
 
 <template>
   <div class="container pt-5">
     <div class="weather__inner card">
       <h1 class="weather__title">Weather Forecast</h1>
-      <p class="weather__text">Check the weather in your city</p>
-      <input class="weather__input" type="text" placeholder="Enter city">
-      <button class="weather__btn btn primary">Get weather</button>
+      <p class="weather__text">Check the weather in {{ city == "" ? "your city" : cityName }}</p>
+      <input class="weather__input" v-model="city" type="text" placeholder="Enter city">
+      <button class="weather__btn btn primary" v-if="city != ''">Get weather</button>
+      <button disabled class="weather__btn btn primary" v-else>Enter the name of the city</button>
     </div>
   </div>
 </template>
