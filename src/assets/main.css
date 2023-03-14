@@ -89,7 +89,7 @@ h3 {
 
 .btn:hover {
   cursor: pointer;
-  opacity: 0.8;
+  opacity: 0.7;
 }
 
 .btn:disabled {
@@ -142,18 +142,20 @@ h3 {
   padding-top: 5rem;
 }
 
-.form-control {
+.form-control,
+.weather__input {
   position: relative;
   margin-bottom: 0.5rem;
 }
 
 .form-control input,
+.weather__input,
 .form-control select {
   margin: 0;
   outline: none;
   border: 2px solid #ccc;
   display: block;
-  width: 100%;
+  /* width: 100%; */
   color: #2c3e50;
   padding: 0.5rem 1.5rem;
   border-radius: 3px;
@@ -189,7 +191,9 @@ h3 {
 }
 
 .form-control input:active,
-.form-control input:focus {
+.form-control input:focus,
+.weather__input:active,
+.weather__input:focus {
   transition: border 0.22s;
   border: 2px solid #42b983;
 }
