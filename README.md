@@ -1,14 +1,25 @@
-# weather-forecast
+# Weather-forecast
 
-This template should help get you started developing with Vue 3 in Vite.
+The main purpose of the project is to write the project on framework Vue.js 3. The project implements the logic of sending a request to a remote API.
 
-## Recommended IDE Setup
+### Project Opportunities
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+The project allows you to check the weather in cities. In the form, you need to enter the name of the city and a window is displayed where will be information about the weather in this city.
 
-## Customize configuration
+What is used:
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+- Programming languages: HTML, CSS, JavaScript ES6;
+- Framework: Vue.js 3;
+
+To clone repository
+
+```shell
+git clone https://github.com/User-960/Weather-forecast.git
+```
+
+---
+
+## Commands
 
 ## Project Setup
 
@@ -26,4 +37,10 @@ npm run dev
 
 ```sh
 npm run build
+```
+
+### Cleaning up the dist folder
+
+```shell
+npm run clear
 ```
