@@ -10,6 +10,7 @@ What is used:
 
 - Programming languages: HTML, CSS, JavaScript ES6;
 - Framework: Vue.js 3;
+- Libraries: Vite;
 
 To clone repository
 
