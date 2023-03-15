@@ -19,6 +19,12 @@
           .then(res => (this.info = res.data));
 
         this.city = "";
+      },
+      getNameCity() {
+        if (this.city !== "") {
+          this.getWeather();
+          this.city = "";
+        }
       }
     },
     computed: {
@@ -61,7 +67,7 @@
     <div class="weather__inner card">
       <h1 class="weather__title">Weather Forecast</h1>
       <p class="weather__text">Check the weather in {{ city == "" ? "your city" : cityName }}</p>
-      <input class="weather__input" v-model="city" type="text" placeholder="Enter city">
+      <input class="weather__input" v-model="city" type="text" v-on:keypress.enter="getNameCity" placeholder="Enter city">
       <button class="weather__btn btn primary" v-if="city != ''" @click="getWeather()">Get weather</button>
       <button disabled class="weather__btn btn primary" v-else>Enter city</button>
       <p class="weather__error">{{ error }}</p>
