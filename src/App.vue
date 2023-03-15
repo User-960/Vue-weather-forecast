@@ -16,24 +16,41 @@
         this.error = "";
 
         axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${this.city}&units=metric&appid=b178e36737a1b78abd26914eec95656d`)
-          .then(res => (this.info = res.data))
+          .then(res => (this.info = res.data));
+
+        this.city = "";
       }
     },
     computed: {
       cityName() {
         return "«" + this.city + "»";
       },
+      showCity() {
+        return this.info.name;
+      },
+      showCoords() {
+        return `https://yandex.ru/maps/?pt=${this.info.coord.lon},${this.info.coord.lat}&z=10&l=map`;
+      },
+      showImg() {
+        return "http://openweathermap.org/img/wn/" + this.info.weather[0].icon + ".png";
+      },
+      showImgAlt() {
+        return this.info.weather[0].description;
+      },
+      showState() {
+        return this.info.weather[0].main;
+      },
       showTemp() {
-        return "Temperature: " + this.info.main.temp;
+        return Math.round(this.info.main.temp) + " °C";
       },
       showFeelsLike() {
-        return "Feels like: " + this.info.main.feels_like;
+        return "Feels like: " + Math.round(this.info.main.feels_like) + " °C";
       },
       showMinTemp() {
-        return "Minimum temperature: " + this.info.main.temp_min;
+        return Math.round(this.info.main.temp_min) + " °C";
       },
       showMaxTemp() {
-        return "Maximum temperature: " + this.info.main.temp_max;
+        return Math.round(this.info.main.temp_max) + " °C";
       }
     }
   }
@@ -49,11 +66,16 @@
       <button disabled class="weather__btn btn primary" v-else>Enter the name of the city</button>
       <p class="weather__error">{{ error }}</p>
 
-      <div v-if="info != null">
-        <p>{{ showTemp }}</p>
-        <p>{{ showFeelsLike }}</p>
-        <p>{{ showMinTemp }}</p>
-        <p>{{ showMaxTemp }}</p>
+      <div class="weather__info" v-if="info != null">
+        <a class="weather__info-link" :href="showCoords"><span>{{ showCity }}</span></a>
+        <div class="weather__info-block">
+          <img :src="showImg" :alt="showImgAlt">
+          <p class="weather__info-block-temp">{{ showTemp }}</p>
+        </div>
+        <div class="weather__info-block-minmax">
+          <p>{{ showMaxTemp }} / {{ showMinTemp }} | {{ showFeelsLike }}</p>
+        </div>
+        <span>{{ showState }}</span>
       </div>
       
     </div>
@@ -62,7 +84,7 @@
 
 <style scoped>
 .weather__inner {
-  height: 500px;
+  height: 100%;
   padding: 20px;
   text-align: center;
   color: #000;
@@ -79,6 +101,7 @@
 .weather__input {
   margin-top: 30px;
   display: inline-block;
+  margin-bottom: 15px;
 }
 
 .weather__btn {
@@ -87,5 +110,41 @@
 
 .weather__error {
   color: #e53935;
+}
+
+.weather__info {
+  padding: 20px;
+  height: 240px;
+  max-width: 500px;
+  margin: 0 auto;
+  color: #fff;
+  border-radius: 10px;
+  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.2);
+  background: rgb(69,72,151);
+  background: linear-gradient(180deg, rgb(92, 95, 182) 0%, rgba(86,123,171,1) 35%, rgba(58,157,178,1) 100%);
+}
+
+.weather__info-link {
+  color: #fff;
+  font-weight: 800;
+  font-size: 18px;
+}
+
+.weather__info-block {
+  display: flex;
+  justify-content: center;
+  height: 80px;
+}
+
+.weather__info-block img {
+  height: 45px;
+  align-self: center;
+}
+
+.weather__info-block-temp {
+  margin: 0;
+  margin-left: 10px;
+  align-self: center;
+  font-size: 30px;
 }
 </style>
