@@ -1,8 +1,11 @@
 <script>
+  import axios from "axios";
+
   export default {
     data: () => ({
       city: "",
-      error: ""
+      error: "",
+      info: null
     }),
     methods: {
       getWeather() {
@@ -11,11 +14,26 @@
           return false;
         }
         this.error = "";
+
+        axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${this.city}&units=metric&appid=b178e36737a1b78abd26914eec95656d`)
+          .then(res => (this.info = res.data))
       }
     },
     computed: {
       cityName() {
         return "«" + this.city + "»";
+      },
+      showTemp() {
+        return "Temperature: " + this.info.main.temp;
+      },
+      showFeelsLike() {
+        return "Feels like: " + this.info.main.feels_like;
+      },
+      showMinTemp() {
+        return "Minimum temperature: " + this.info.main.temp_min;
+      },
+      showMaxTemp() {
+        return "Maximum temperature: " + this.info.main.temp_max;
       }
     }
   }
@@ -30,6 +48,8 @@
       <button class="weather__btn btn primary" v-if="city != ''" @click="getWeather()">Get weather</button>
       <button disabled class="weather__btn btn primary" v-else>Enter the name of the city</button>
       <p class="weather__error">{{ error }}</p>
+
+      <p v-show="info != null">{{ info }}</p>
     </div>
   </div>
 </template>
