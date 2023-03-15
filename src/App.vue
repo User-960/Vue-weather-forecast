@@ -49,7 +49,13 @@
       <button disabled class="weather__btn btn primary" v-else>Enter the name of the city</button>
       <p class="weather__error">{{ error }}</p>
 
-      <p v-show="info != null">{{ info }}</p>
+      <div v-if="info != null">
+        <p>{{ showTemp }}</p>
+        <p>{{ showFeelsLike }}</p>
+        <p>{{ showMinTemp }}</p>
+        <p>{{ showMaxTemp }}</p>
+      </div>
+      
     </div>
   </div>
 </template>
