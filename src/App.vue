@@ -57,17 +57,20 @@
 </script>
 
 <template>
-  <div class="container pt-5">
+  <div class="container pt-2">
     <div class="weather__inner card">
       <h1 class="weather__title">Weather Forecast</h1>
       <p class="weather__text">Check the weather in {{ city == "" ? "your city" : cityName }}</p>
       <input class="weather__input" v-model="city" type="text" placeholder="Enter city">
       <button class="weather__btn btn primary" v-if="city != ''" @click="getWeather()">Get weather</button>
-      <button disabled class="weather__btn btn primary" v-else>Enter the name of the city</button>
+      <button disabled class="weather__btn btn primary" v-else>Enter city</button>
       <p class="weather__error">{{ error }}</p>
 
       <div class="weather__info" v-if="info != null">
-        <a class="weather__info-link" :href="showCoords"><span>{{ showCity }}</span></a>
+        <a class="weather__info-link" :href="showCoords">
+          <span>{{ showCity }}</span>
+          <img class="weather__info-img" src="./assets/images/marker.svg" alt="marker">
+        </a>
         <div class="weather__info-block">
           <img :src="showImg" :alt="showImgAlt">
           <p class="weather__info-block-temp">{{ showTemp }}</p>
@@ -94,6 +97,7 @@
   margin-top: 50px;
 }
 
+
 .weather__text {
   margin-top: 20px;
 }
@@ -114,14 +118,14 @@
 
 .weather__info {
   padding: 20px;
-  height: 240px;
+  max-height: 280px;
   max-width: 500px;
   margin: 0 auto;
   color: #fff;
   border-radius: 10px;
   box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.2);
   background: rgb(69,72,151);
-  background: linear-gradient(180deg, rgb(92, 95, 182) 0%, rgba(86,123,171,1) 35%, rgba(58,157,178,1) 100%);
+  background: linear-gradient(180deg, rgb(92, 95, 182) 0%, rgb(86, 123, 171) 35%, rgba(58,157,178,1) 100%);
 }
 
 .weather__info-link {
@@ -146,5 +150,11 @@
   margin-left: 10px;
   align-self: center;
   font-size: 30px;
+}
+
+.weather__info-img {
+  margin-left: 5px;
+  width: 18px;
+  height: 18px;
 }
 </style>
